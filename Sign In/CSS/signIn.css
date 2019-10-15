@@ -1,0 +1,78 @@
+body{
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #fff;
+	background-size: cover;
+}
+.signin
+{
+	background: rgba(62, 142, 223, 0.7);
+	padding: 40px;
+	width: 250px;
+	margin: auto;
+	margin-top: 80px;
+	height: 400px;
+	margin-left: 180px;
+}
+form
+{
+	width: 240px;
+	text-align: center;
+}
+
+input
+{
+	width: 240px;
+	text-align: center;
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #fff ;
+	font-family: 'Play', sans-serif;
+	font-size: 16px;
+	font-weight: 200px;
+	padding: 10px 0px;
+	transition: border 0.5s;
+	outline: none;
+	color: #fff;
+}
+input[type=button]
+{
+	border: none;
+	width: 150px;
+	margin-top: 30px ;
+	background: white;
+	color: #000;
+	font-size: 16px;
+	line-height: 20px;
+	border-radius: 15px ;
+	cursor: pointer;
+}
+input[type=button]:hover
+{
+	color: #fff;
+	background-color:blue ;
+}
+h2
+{
+	color: white;
+}
+a
+{
+	color: yellow;
+	text-decoration: blink;
+	font-style: italic;
+	margin-left: 10px;
+}
+a:hover
+{
+	color: skyblue;
+}
+.container
+{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+::placeholder {
+	color: aliceblue;
+	opacity: 0.8;
+}

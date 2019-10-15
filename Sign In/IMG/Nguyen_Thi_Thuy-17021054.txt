@@ -1,0 +1,54 @@
+﻿Họ và tên: Nguyễn Thị Thúy
+MSSV: 17021054
+1. show INDEX FROM film_text;
+2. EXPLAIN EXTENDED SELECT * FROM film_text WHERE film_text.description LIKE "A emotional%";
+	a) Loại index đã được sử dụng: 
+	   Số lượng bản ghi duyệt qua: 1000
+	b) CREATE INDEX prefix_index ON film_text (description);
+	   Số lượng bản ghi được duyệt qua sau khi thêm prefix_index vào cột description: 54
+3. a) SELECT * FROM actor STRAIGHT_JOIN film_actor ON film_actor.actor_id = actor.actor_id
+   b) EXPLAIN SELECT * FROM actor STRAIGHT_JOIN film_actor ON film_actor.actor_id = actor.actor_id
+	số lượng bản ghi duyệt qua ở bảng actor là 200
+	số lượng bản ghi duyệt qua ở bảng film_actor là 13
+      EXPLAIN SELECT * FROM film_actor STRAIGHT_JOIN actor ON film_actor.actor_id = actor.actor_id
+	số lương bản ghi duyệt qua ở bảng actor là 1
+	số lượng bản ghi duyệt qua ở bảng film_actor là 5462 dòng
+4. SELECT film.title, actor.first_name, actor.last_name 
+   FROM film STRAIGHT_JOIN film_actor ON film.film_id = film_actor.film_id
+		  STRAIGHT_JOIN actor ON actor.actor_id = film_actor.actor_id
+   a)EXPLAIN SELECT film.title, actor.first_name, actor.last_name 
+	     FROM film STRAIGHT_JOIN film_actor ON film.film_id = film_actor.film_id
+		       STRAIGHT_JOIN actor ON actor.actor_id = film_actor.actor_id 
+	số lương bản ghi duyệt qua ở bảng film là 1000
+	số lương bản ghi duyệt qua ở bảng actor là 1
+	số lượng bản ghi duyệt qua ở bảng film_actor là 2
+   b)EXPLAIN SELECT film.title, actor.first_name, actor.last_name 
+	     FROM film STRAIGHT_JOIN actor 
+		       STRAIGHT_JOIN film_actor ON actor.actor_id = film_actor.actor_id AND film.film_id = film_actor.film_id
+	số lương bản ghi duyệt qua ở bảng film là 1000
+	số lương bản ghi duyệt qua ở bảng actor là 200
+	số lượng bản ghi duyệt qua ở bảng film_actor là  1
+   c)EXPLAIN SELECT film.title, actor.first_name, actor.last_name 
+	     FROM film_actor STRAIGHT_JOIN film
+		             STRAIGHT_JOIN actor ON actor.actor_id = film_actor.actor_id AND film.film_id = film_actor.film_id
+	số lương bản ghi duyệt qua ở bảng film là 5462
+	số lương bản ghi duyệt qua ở bảng actor là 1
+	số lượng bản ghi duyệt qua ở bảng film_actor là  1
+   d)EXPLAIN SELECT film.title, actor.first_name, actor.last_name 
+	     FROM film_actor STRAIGHT_JOIN actor
+		             STRAIGHT_JOIN film ON actor.actor_id = film_actor.actor_id AND film.film_id = film_actor.film_id
+	số lương bản ghi duyệt qua ở bảng film là 1
+	số lương bản ghi duyệt qua ở bảng actor là 1
+	số lượng bản ghi duyệt qua ở bảng film_actor là  5462
+   e)EXPLAIN SELECT film.title, actor.first_name, actor.last_name 
+	     FROM actor STRAIGHT_JOIN film 
+		             STRAIGHT_JOIN film_actor ON actor.actor_id = film_actor.actor_id AND film.film_id = film_actor.film_id
+	số lương bản ghi duyệt qua ở bảng film là 1000 
+	số lương bản ghi duyệt qua ở bảng actor là 200 
+	số lượng bản ghi duyệt qua ở bảng film_actor là  1 
+   f)EXPLAIN SELECT film.title, actor.first_name, actor.last_name 
+	     FROM actor STRAIGHT_JOIN film_actor 
+		             STRAIGHT_JOIN film ON actor.actor_id = film_actor.actor_id AND film.film_id = film_actor.film_id
+	số lương bản ghi duyệt qua ở bảng film là 1
+	số lương bản ghi duyệt qua ở bảng actor là 200 
+	số lượng bản ghi duyệt qua ở bảng film_actor là  13 
